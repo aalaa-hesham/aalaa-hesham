@@ -1,10 +1,12 @@
 <?php
 $sqrt = '';
 // $num = "";
-// $power = " ";
-$num = $_POST ['num_r'];
-$power = $_POST ['power'];
-$sqrt = ($num ** (1/$power));
+if($_POST){
+    $num = $_POST ['num_r'];
+    $power = $_POST ['power'];
+    $sqrt = ($num ** (1/$power));
+}
+
 
 
 ?>
@@ -42,7 +44,7 @@ $sqrt = ($num ** (1/$power));
                 <form method="POST">
                 <div class="form-group">
                         <label for="num_r">NUMBER</label>
-                        <input type="text" name="nom_r" id="nom_r" class="form-control">
+                        <input type="text" name="num_r" id="nom_r" class="form-control">
                     </div>
                         <div class="form-group">
                         <label for="power">POWER</label>

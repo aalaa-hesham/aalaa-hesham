@@ -1,25 +1,29 @@
 <?php
 $final_r ="";
-define('max_grade',100)
-if($_POST) {
-    $Percentage = $_POST['grade_student'];
-    $total = ($Percentage/max_grade) *100;
-    if($total >= 90%) {
+define('max_grade',500);
+if ($_POST) {
+    $grade_m = $_POST['grade_m'];
+    $grade_s = $_POST['grade_s'];
+    $grade_e = $_POST['grade_e'];
+    $grade_a = $_POST['grade_a'];
+    $grade_b = $_POST['grade_b'];
+    $sum = $grade_m + $grade_s + $grade_e + $grade_a + $grade_b;
+    $total = $sum / max_grade;
+    $Percentage = $total * 100; 
+    if($total >= 90) {
       $final_r = "Grade A";
-    } elseif ($total >= 80%) {
+    } elseif ($total >= 80) {
         $final_r = "Grade B";
-    } elseif ($total >= 70%) {
+    } elseif ($total >= 70) {
         $final_r = "Grade C";
-    } elseif ($total >= 60%) {
+    } elseif ($total >= 60) {
         $final_r = "Grade D";
-    } elseif ($total >= 40%) {
+    } elseif ($total >= 40) {
         $final_r = "Grade E";
     }
-    elseif ($total > 40%) {
+    elseif ($total > 40) {
         $final_r = "Grade F";
-      }
-     }
-     
+    }}   
     
 
 
@@ -83,14 +87,12 @@ if($_POST) {
 </div>
 <ul class="alert alert-success">
                     <li>
-                    percentage : <?php echo $total .' '.$final_r ?><b>%</b>
+                    percentage : <?php echo $Percentage .' '.$final_r ?><b>%</b>
     </li>
     </ul>
 </form>
 </div>
-</div>
-                   
-    
+</div>          
 </div>
     
 
