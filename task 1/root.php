@@ -38,7 +38,9 @@ if($_POST){
 <div class="col-6 offset-5 text-center">
 <button class=" btn btn-outline-danger form-control text-center mt-3"> ROOT </button>
 </div>
-<?php echo $sqrt; ?>
+<?php if(isset( $sqrt ))
+  echo $sqrt; ?>
+
 </div>
 </form>
 </div>        

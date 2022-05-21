@@ -1,5 +1,6 @@
 <?php
 $result = "";
+if ($_POST) {
 $num = $_POST['num'];
 $num2 = $_POST['num2'];
 $operation = $_POST['operation'];
@@ -20,6 +21,7 @@ if (($num) && ($num2)) {
         case "modulus":
             $result = $num % $num2;
     }
+}
 }
 ?>
 

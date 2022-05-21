@@ -4,9 +4,9 @@ $result = '';
 if ($_POST) {
     $evenORod = $_POST['number'];
     if ($evenORod % 2 ==0) {
-        $result = "num is Odd";
+        $result = "num is Even";
     } else{
-        $result = "Num is Even";
+        $result = "Num is odd";
     }
 }
 

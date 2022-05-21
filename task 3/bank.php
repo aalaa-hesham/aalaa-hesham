@@ -1,17 +1,15 @@
 <?php
-$rate =" ";
+$rate = " ";
 define('repayment', 0.10);
 define('repayment2', 0.15);
-$vat = repayment * 100;
-$vat2 = repayment2 * 100;
 if ($_POST) {
     $user = $_POST['user-name'];
     $amount = $_POST['loan-amount'];
     $yloan = $_POST['loan-years'];
     if ($yloan <= 3) {
-        $rate = $vat * $yloan;
-    } elseif ($yloan > 5) {
-        $rate = $vat2 * $yloan;
+        $rate = repayment * $yloan * $amount;
+    } else {
+        $rate = repayment2 * $yloan * $amount;
     }
     $afterinterest = $rate + $amount;
     $year = $yloan * 12;
@@ -52,24 +50,27 @@ if ($_POST) {
                         <div class="col-6 offset-5 text-center">
                             <button class=" btn btn-outline-danger form-control text-center mt-3"> calculate </button>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">user name</th>
-                                    <th scope="col">interest rate</th>
-                                    <th scope="col">Loan after interest</th>
-                                    <th scope="col">monthly</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><?php echo $user ?></th>
-                                    <td><?php echo $rate ?></td>
-                                    <td><?= $afterinterest ?></td>
-                                    <td><?= $monthly ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <?php if ($_POST) { ?>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">user name</th>
+                                        <th scope="col">interest rate</th>
+                                        <th scope="col">Loan after interest</th>
+                                        <th scope="col">monthly</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><?php echo $user ?></th>
+                                        <td><?php echo $rate ?></td>
+                                        <td><?= $afterinterest ?></td>
+                                        <td><?= $monthly ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+
                     </form>
                 </div>
             </div>

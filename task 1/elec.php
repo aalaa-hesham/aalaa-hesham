@@ -46,20 +46,22 @@ if ($_POST) {
                         <div class="col-6 offset-5 text-center">
                             <button class=" btn btn-outline-danger form-control text-center mt-3"> RESULT </button>
                         </div>
+                        <?php if ($_POST) { ?>
                         <ul class="alert alert-success">
                             <li>
-                                unit: <?php echo $result ?><b>%</b>
+                                unit: <?php echo $result ?? "" ; ?><b>%</b>
                             </li>
                             <li>
-                                price: <?php echo $price ?><b>LE</b>
-                            </li>
+                                price: <?php  echo $price ?? "" ;?><b>LE</b>
+                            </li> 
                             <li>
-                                bill: <?php echo additional_surcharge * 100 ?><b>%</b>
+                                bill: <?php echo additional_surcharge * 100   ?? "" ;?><b>%</b>
                             </li>
-                            <li>
-                                price After Bill: <?php echo $priceAfterBill ?><b>LE</b>
+                            <li> 
+                                price After Bill: <?php if (isset($priceAfterBill)) echo $priceAfterBill; ?><b>LE</b>
                             </li>
                         </ul>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
