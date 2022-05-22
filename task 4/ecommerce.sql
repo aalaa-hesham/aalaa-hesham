@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2022 at 10:21 PM
+-- Generation Time: May 22, 2022 at 12:12 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.18
 
@@ -345,10 +345,10 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `code` int(5) NOT NULL,
   `gender` enum('m - f') NOT NULL COMMENT 'm= male\r\nf= female',
-  `image` varchar(64) NOT NULL DEFAULT '1',
+  `image` varchar(64) NOT NULL DEFAULT 'image.jpg',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `phone_verified_at` timestamp NULL DEFAULT NULL,
-  `birthdate` date DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0 = not active\r\n1= active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
@@ -496,7 +496,9 @@ ALTER TABLE `subcategories`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`,`phone`),
+  ADD UNIQUE KEY `code` (`code`);
 
 --
 -- AUTO_INCREMENT for dumped tables

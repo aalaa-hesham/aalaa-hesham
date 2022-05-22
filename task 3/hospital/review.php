@@ -4,7 +4,9 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
     die;
 }
 
-
+ if($_SERVER['REQUEST_METHOD'] === "POST"){
+$number = $_POST['number'];
+ }
 
 
 
@@ -36,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
                     HOSPITAL
                 </h4>
             </div>
-            <?php if($_post['number']) { ?>
+            
             <table class="table">
                 <thead>
                     <tr>
@@ -88,7 +90,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
                     </tr>
                 </tbody>
             </table>
-            <?php } ?>
+            
         </div>
     </div>
 

@@ -24,7 +24,7 @@
                 </h4>
             </div>
             <div class="col-4 offset-4  mt-5">
-                <form action="invoice.php" method="POST">
+                <form action="review.php" method="POST">
                     <div class="form-group">
                         <label for="Name">phone number</label>
                         <input type="text" name="number" id="number" class="form-control" placeholder="" aria-describedby="helpId">

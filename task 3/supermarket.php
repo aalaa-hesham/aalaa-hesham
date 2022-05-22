@@ -1,4 +1,10 @@
+<?php
 
+
+
+
+
+?>
 
 
 
@@ -33,6 +39,7 @@
                             <label for="City">City</label>
                             <select name="city" id="City" class="form-control">
                                 <option value="Cairo">Cairo</option>
+                                <option value="Giza">Giza</option>
                                 <option value="Alex">Alex</option>
                                 <option value="Others">Others</option>
                             </select>
