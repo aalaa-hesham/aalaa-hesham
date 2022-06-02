@@ -1,12 +1,18 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] === "GET"){
     echo "<h1>Method Not Allowed 405</h1>";
-    die;
+        die ;
 }
 
- if($_SERVER['REQUEST_METHOD'] === "POST"){
-$number = $_POST['number'];
- }
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $num = $_POST['number'];
+    if(empty ($num)){
+        echo "<h1>Method Not Allowed 405</h1>";
+        die ;
+    }
+
+    }
+
 
 
 
@@ -38,59 +44,61 @@ $number = $_POST['number'];
                     HOSPITAL
                 </h4>
             </div>
-            
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">QUESTIONS</th>
-                        <th scope="col"> BAD</th>
-                        <th scope="col">GOOD</th>
-                        <th scope="col">VERY GOOD</th>
-                        <th scope="col">EXCELLENT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="table-primary col-6">Are you satisfing about the level of cleanliness?</td>
-                        <td class="table-secondary"> <input name="bad" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-success"> <input name="good" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-danger"> <input name="very_good" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-warning "> <input name="excellent" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                    </tr>
-                    <tr>
-                        <td class="table-info col-6">Are you satisfied with the level of cleanliness?</td>
-                        <td class="table-secondary"> <input class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-success"> <input class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-danger"> <input class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-warning "> <input class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                    </tr>
-                    <tr>
-                        <td class="table-light col-6">Are you satisfied about the price of services?</td>
-                        <td class="table-secondary"> <input name="bad"class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-success"> <input name="good"class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-danger"> <input name="very_good" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-warning "> <input name="excellent" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                    </tr>
-                    <tr>
-                        <td class="table-info col-6">Are you satisfing about nursing?</td>
-                        <td class="table-secondary"> <input name="bad"class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-success"> <input name="good"class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-danger"> <input name="very_good"class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-warning "> <input name="excellent"class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                    </tr>
-                    <tr>
-                        <td class="table-primary col-6">Are you satisfing about the calm in hospital?</td>
-                        <td class="table-secondary"> <input name="bad" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-success"> <input name="good" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-danger"> <input name="very_good" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                        <td class="table-warning "> <input name="excellent" class="form-check-input mx-4" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked></td>
-                    </tr>
-                    <tr>
-                    <td colspan="6" class="table-active"><button class=" btn btn-outline-danger form-control text-center mt-3"> result </button></td>
-                    </tr>
-                </tbody>
-            </table>
-            
+            <form action="result.php" method='POST'>
+                
+            <input type="hidden" name="phone" value="<?= isset($num) ? $num : "" ?>">
+                <table class="table col offset-3" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">QUESTIONS</th>
+                            <th scope="col" > BAD</th>
+                            <th scope="col" >GOOD</th>
+                            <th scope="col">VERY GOOD</th>
+                            <th scope="col"> EXCELLENT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-primary col-6">Are you satisfing about the level of cleanliness?</td>
+                            <td class="table-secondary"> <input name="radioNoLabel" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="bad" checked></td>
+                            <td class="table-success"> <input name="radioNoLabel" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="good" checked></td>
+                            <td class="table-danger"> <input name="radioNoLabel" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="very_good" checked></td>
+                            <td class="table-warning "> <input name="radioNoLabel" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="excellent" checked></td>
+                        </tr>
+                        <tr>
+                            <td class="table-info col-6">Are you satisfied about doctors?</td>
+                            <td class="table-secondary"> <input name="radioNoLabe2" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="bad" checked></td>
+                            <td class="table-success"> <input name="radioNoLabe2" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="good" checked></td>
+                            <td class="table-danger"> <input name="radioNoLabe2" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="very_good" checked></td>
+                            <td class="table-warning "> <input name="radioNoLabe2" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="excellent" checked></td>
+                        </tr>
+                        <tr>
+                            <td class="table-light col-6">Are you satisfied about the price of services?</td>
+                            <td class="table-secondary"> <input name="radioNoLabe3" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="bad" checked></td>
+                            <td class="table-success"> <input name="radioNoLabe3" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="good" checked></td>
+                            <td class="table-danger"> <input name="radioNoLabe3" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="very_good" checked></td>
+                            <td class="table-warning "> <input name="radioNoLabe3" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="excellent" checked></td>
+                        </tr>
+                        <tr>
+                            <td class="table-info col-6">Are you satisfing about nursing?</td>
+                            <td class="table-secondary"> <input name="radioNoLabe4" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="bad" checked></td>
+                            <td class="table-success"> <input name="radioNoLabe4" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="good" checked></td>
+                            <td class="table-danger"> <input name="radioNoLabe4" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="very_good" checked></td>
+                            <td class="table-warning "> <input name="radioNoLabe4" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="excellent" checked></td>
+                        </tr>
+                        <tr>
+                            <td class="table-primary col-6">Are you satisfing about the calm in hospital?</td>
+                            <td class="table-secondary"> <input name="radioNoLabe5" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="bad" checked></td>
+                            <td class="table-success"> <input name="radioNoLabe5" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="good" checked></td>
+                            <td class="table-danger"> <input name="radioNoLabe5" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="very_good" checked></td>
+                            <td class="table-warning "> <input name="radioNoLabe5" class="check-input mx-4" type="radio" id="flexRadioDisabled" value="excellent" checked></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="table-active"><button type="submit" name="result" class=" btn btn-outline-danger form-control text-center mt-3"> result </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 

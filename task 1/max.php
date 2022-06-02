@@ -1,6 +1,5 @@
 <?php
-// post it is variable used to see if the input is full , it will be work 
-// parent if
+
 if($_POST) {
 $firstn = $_POST['first'];
 $secondn = $_POST['second'] ;
@@ -14,8 +13,7 @@ if($firstn > $secondn && $firstn > $thirdn) {
 } elseif ($thirdn > $firstn && $thirdn > $secondn) {
  $result =  "max num is {$thirdn}";
 }
-// min number
-// child if
+
 if($firstn < $secondn && $firstn < $thirdn) {
   $result .= " && min num is {$firstn}";
 }elseif ($secondn < $firstn && $secondn < $thirdn) {

@@ -1,6 +1,4 @@
-<?php 
 
-?>
 
 
 
@@ -26,7 +24,7 @@
             <div class="col-4 offset-4  mt-5">
                 <form action="review.php" method="POST">
                     <div class="form-group">
-                        <label for="Name">phone number</label>
+                        <label for="number">phone number</label>
                         <input type="text" name="number" id="number" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <button class=" btn btn-outline-primary form-control"> submit </button>

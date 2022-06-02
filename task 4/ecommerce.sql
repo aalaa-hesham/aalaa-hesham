@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2022 at 12:12 PM
+-- Generation Time: May 23, 2022 at 03:37 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.18
 
@@ -34,7 +34,7 @@ CREATE TABLE `admins` (
   `email` varchar(320) NOT NULL,
   `phone_verified_at` timestamp NULL DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `code` int(5) DEFAULT NULL,
+  `code` int(6) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 = active\r\n0 = not active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -145,7 +145,7 @@ CREATE TABLE `complains_replies` (
 
 CREATE TABLE `copouns` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `code` varchar(20) DEFAULT NULL,
+  `code` int(6) DEFAULT NULL,
   `discount` tinyint(7) UNSIGNED NOT NULL,
   `discount_type` varchar(320) NOT NULL,
   `min_order_price` tinyint(3) UNSIGNED NOT NULL,
@@ -343,7 +343,7 @@ CREATE TABLE `users` (
   `email` varchar(320) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `code` int(5) NOT NULL,
+  `code` int(6) NOT NULL,
   `gender` enum('m - f') NOT NULL COMMENT 'm= male\r\nf= female',
   `image` varchar(64) NOT NULL DEFAULT 'image.jpg',
   `email_verified_at` timestamp NULL DEFAULT NULL,
