@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $validation->setKey('last_name')->setValue($_POST['last_name'])->required()->string()->min(2)->max(32);
     $validation->setKey('Phone')->setValue($_POST['Phone'])->required()->regex('/^01[0125][0-9]{8}$/')->unique('users', 'phone');
     $validation->setKey('email')->setValue($_POST['email'])->required()->regex('/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/')->unique('users', 'email');
-    $validation->setKey('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/', "Minimum 8 characters,and maximum 20 , at least one uppercase letter, one lowercase letter, one number and one special character:")->confirmed($_POST['password_confirmation']);
+    $validation->setKey('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/', "Minimum 6 characters,and maximum 20 , at least one uppercase letter, one lowercase letter, one number and one special character:")->confirmed($_POST['password_confirmation']);
     $validation->setKey('password_confirmation')->setValue($_POST['password_confirmation'])->required();
     $validation->setKey('gender')->setValue($_POST['gender'])->required()->in(['m', 'f']);
     if (empty($validation->getErrors())) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         try{
             $user->insert();
-            // send code
+            
             $body = " Hello {$_POST['first_name']} {$_POST['last_name']}. Your Verification Code:<b style='color:blue;'>{$code} Thank You";
             $verificationCode = new VerificationCode($_POST['email'],"Verification Code",$body);
             if($verificationCode->send()){

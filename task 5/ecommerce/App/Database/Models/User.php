@@ -12,7 +12,7 @@ class User extends Model implements ConnectTo {
     private string $phone;
     private string $gender;
     private int $code;
-    private string $image = 'image.jpg';
+    private  $image;
     private int $status;
     private string $email_verified_at;
     private string $phone_verified_at;
@@ -288,13 +288,11 @@ class User extends Model implements ConnectTo {
         $stmt->execute();
         return $stmt;
     }
-    public function makeUserVerified()
-    {
-        $query = "UDATE".self::table." SET email_verified_at = ? whwere 'email' = ?";   
+    public function makeUserVerified() {
+        $query = "UPDATE ".self::table." SET email_verified_at = ? WHERE email = ?";
         $stmt = $this->con->prepare($query);
         $stmt->bind_param('ss',$this->email_verified_at,$this->email);
-        
-        return $stmt->execute();;
+        return $stmt->execute();
     }
     public function getUserByEmail()
     {
@@ -304,5 +302,29 @@ class User extends Model implements ConnectTo {
         $stmt->execute();
         return $stmt;
     }
+    public function updateCodeByEamil() {
+        $query = "UPDATE ".self::table." SET code = ? WHERE email = ?";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param('ss',$this->code,$this->email);
+        return $stmt->execute();
+    }
+
+    public function updatePasswordByEmail() {
+        $query = "UPDATE ".self::table." SET password = ? WHERE email = ?";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param('ss',$this->password,$this->email);
+        return $stmt->execute();
+    }
+    public function update() {
+        $image = "img.jpg";
+        if($this->image){
+            $image = $this->image;
+        }
+        $query = "UPDATE ".self::table." SET first_name = ?,last_name = ?,gender = ?, phone = ? ,image = ? WHERE email = ?";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param('ssssss',$this->first_name,$this->last_name,$this->gender,$this->phone,$image,$this->email);
+        return $stmt->execute();
+    }
+
 }
 ?>

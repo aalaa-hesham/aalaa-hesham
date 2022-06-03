@@ -1,7 +1,15 @@
 <?php
 require_once "vendor/autoload.php";
+use App\Database\Models\User;
+
 ob_start();
 session_start();
+if(isset($_COOKIE['rememberMe'])){
+    $user = new User;
+    $user->setEmail($_COOKIE['rememberMe']);
+    $authenticatedUser = $user->getUserByEmail()->get_result()->fetch_object();
+    $_SESSION['user'] = $authenticatedUser;
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">

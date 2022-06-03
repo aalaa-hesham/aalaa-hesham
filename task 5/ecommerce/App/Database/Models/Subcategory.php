@@ -172,4 +172,20 @@ class Subcategory extends Model implements ConnectTo {
 
         return $this;
     }
+    public function getSubCategoryByCategoryId()
+    {
+        $query = "SELECT `id` , `name_en` FROM " . self::table . " WHERE `category_id` = ? ORDER BY `name_en` ASC";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param('i',$this->category_id);
+        $stmt->execute();
+        return $stmt;
+    }
+    public function find()
+    {
+        $query = "SELECT `id` , `name_en` FROM " . self::table . " WHERE `id` = ? ";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param('i',$this->id);
+        $stmt->execute();
+        return $stmt;
+    }
 }

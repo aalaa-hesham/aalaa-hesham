@@ -12,13 +12,14 @@ use App\Http\Requests\Validation;
 $validation = new Validation;
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $validation->setKey('email')->setValue($_POST['email'])->required()->regex('/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/', 'wrong email or password')->exists('users', 'email');
-    $validation->setKey('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/', 'wrong email or password');
+    $validation->setKey('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/', 'wrong email or password');
 
     if (empty($validation->getErrors())) {
         $user = new User;
         $user->setEmail($_POST['email']);
 
         if ($user->getUserByEmail()->get_result()->num_rows == 1) {
+            
             $authenticatedUser = $user->getUserByEmail()->get_result()->fetch_object();
                     //  comparaison between pass db and input user
             if (password_verify($_POST['password'], $authenticatedUser->password)) {
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if ($authenticatedUser->email_verified_at) {
 
                     if (isset($_POST['remember_me'])) {
-                        setcookie('remember_me', $_POST['email'], time() + 86400 * 365, '/');
+                        setcookie('rememberMe', $_POST['email'], time() + 86400 * 365, '/');
                     }
                     $_SESSION['user'] = $authenticatedUser;
 
@@ -71,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         <?= isset($error) ? "<p class='text-danger'>" . $error . "</p>" : "" ?>
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
-                                                <input type="checkbox">
+                                                <input type="checkbox" name="remember_me">
                                                 <label>Remember Me</label>
-                                                <a href="#">Forgot Password?</a>
+                                                <a href="forget-password.php">Forgot Password?</a>
                                             </div>
                                             <button type="submit"><span>Login</span></button>
                                         </div>

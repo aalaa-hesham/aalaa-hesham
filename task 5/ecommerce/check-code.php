@@ -15,7 +15,7 @@ if ($_GET) {
     include "layouts/errors/404.php";
     die;
 }
-$title = "Check Code";
+
 include_once "layouts/header.php";
 include_once "App/Middlewares/guest.php";
 

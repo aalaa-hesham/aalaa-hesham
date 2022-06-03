@@ -2,32 +2,25 @@
 
 use App\Database\Models\User;
 use App\Http\Requests\Validation;
-use App\Mails\VerificationCode;
 
-$title = "Forget Password";
+$title = "Reset Password";
 include_once "layouts/header.php";
 include_once "App/Middlewares/guest.php";
 
 $validation = new Validation;
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $validation->setKey('email')->setValue($_POST['email'])->required()->regex('/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/')->exists('users','email');
+    $validation->setKey('password')->setValue($_POST['password'])->required()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/',"Minimum 6 characters,and maximum 20 , at least one uppercase letter, one lowercase letter, one number and one special character:")->confirmed($_POST['password_confirmation']);
+    $validation->setKey('password_confirmation')->setValue($_POST['password_confirmation'])->required();
+
     if(empty($validation->getErrors())){
         $code = rand(100000,999999);
         $user = new User;
-        $user->setEmail($_POST['email']);
-        $user->setCode($code);
+        $user->setEmail($_SESSION['email']);
+        $user->setPassword($_POST['password']);
         try{
-            $user->updateCodeByEamil();
-            $body = "<p> Hello {$_POST['email']}.</p><p>We received A new request to reset your password.<br> Your Verification Code:<b style='color:blue;'>{$code}</b> </p><p>Thank You.</p>";
-            $verificationCode = new VerificationCode($_POST['email'],'Forget Password Code',$body);
-            if($verificationCode->send()){
-                $_SESSION['email'] = $_POST['email'];
-
-                header('location:check-code.php?page=forget-password');die;
-            }else{
-                $error = "<p class='alert alert-danger'> please try again later </p>";
-            }
+            $user->updatePasswordByEmail();
+            header('location:login.php');die;
         }catch(\Exception $e){
             $error = "<p class='alert alert-danger'> something went wrong </p>";
         }
@@ -51,10 +44,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                                 <div class="login-register-form">
                                     <form action="" method="post">
                                         <?= $error ?? "" ?>
-                                        <input type="email" name="email" placeholder="Email Address" value="<?= $_POST['email'] ?? "" ?>">
-                                        <?= "<p class='text-danger font-weight-bold'>".$validation->getError('email')."</p>" ?>
+                                        <input type="password" name="password" placeholder="New Password">
+                                        <?= "<p class='text-danger font-weight-bold'>".$validation->getError('password')."</p>" ?>
+                                        <input type="password" name="password_confirmation" placeholder="Confrim Password">
+                                        <?= "<p class='text-danger font-weight-bold'>".$validation->getError('password_confirmation')."</p>" ?>
                                         <div class="button-box">
-                                            <button type="submit"><span>Check</span></button>
+                                            <button type="submit"><span>Reset</span></button>
                                         </div>
                                     </form>
                                 </div>
